@@ -60,5 +60,5 @@ func main() {
 	}
 
 	http.HandleFunc("/", viewHandler)
-	http.ListenAndServeTLS(*addr, *cert, *key, nil)
+	log.Fatal(http.ListenAndServeTLS(*addr, *cert, *key, nil))
 }
