@@ -48,6 +48,9 @@ func viewHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	addr := flag.String("addr", ":443", "Listening address")
+	cert := flag.String("cert", ".tls/server.crt", "certificate file")
+	key := flag.String("key", ".tls/server.key", "private key file")
+
 	flag.Parse()
 
 	if t, e := template.New("gotags").Parse(goTagsTemplate); e != nil {
@@ -57,5 +60,5 @@ func main() {
 	}
 
 	http.HandleFunc("/", viewHandler)
-	http.ListenAndServeTLS(*addr, "server.pem", "server.key", nil)
+	http.ListenAndServeTLS(*addr, *cert, *key, nil)
 }
